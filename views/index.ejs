@@ -1,0 +1,56 @@
+
+<!-- Import Header -->
+<%- include('include/_header') %>
+<!-- End Import Header -->
+
+<!-- Main section -->
+
+<div style="margin: 20px  0;text-align: center  ;">
+
+    <a href="/add-task">
+        <button type="button" class="btn btn-success">Add New Task</button>
+    </a>
+
+
+</div>
+
+
+<div style="margin: 50px 15%">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col" >Position</th>
+            <th scope="col" style="text-align: center">Task name</th>
+            <th scope="col" >Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i=0; i < list.length; i++) {%>
+          <tr>
+            <th scope="row"><%= list[i].position %></th>
+            <td style="width: 50%;text-align:center "><%= list[i].task %></td>
+            <td class="body-task-action">
+                <a href="/edit-task/<%= list[i].id %>">
+                <button type="button" class="btn btn-info"><i class="fas fa-pencil-alt"></i></button>
+                </a>
+
+                <a href="/delete-task/<%= list[i].id %>">
+                <button type="button" class="btn btn-danger"><i class="fas fa-times"></i></button>
+
+                </a>
+            </td>
+          </tr>
+          <% } %>
+        
+        </tbody>
+      </table>
+</div>
+
+
+
+<!-- End Main Section -->
+
+
+<!-- Import Header -->
+<%- include('include/_footer') %>
+<!-- End Import Header -->

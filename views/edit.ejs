@@ -1,0 +1,86 @@
+
+<!-- Import Header -->
+<%- include('include/_header') %>
+<!-- End Import Header -->
+
+<!-- Main section -->
+<style>
+  #danger-message{
+    display: none;
+  }
+</style>
+
+
+<div style="text-align: center;margin: 30px 0;"> 
+   <h1>Edit task</h1> 
+</div>
+
+
+<div style="margin: 30px 30% ;">
+
+    <form id="form" method="post">
+        <div class="form-group">
+          <label for="task-name">Task name</label>
+          <input type="text" value="<%= value.task %>" name="task_name" class="form-control" id="task-name"  placeholder="Enter task name">
+          <small id="emailHelp" class="form-text text-muted">Write your task name</small>
+        </div>
+
+        <div class="form-group">
+          <label for="task-position">Task Position</label>
+          <input type="number"   value="<%= value.position %>" name="task_position" class="form-control" id="task-position"  placeholder="Enter task position">
+          <small id="emailHelp" class="form-text text-muted">Write your task position you want</small>
+        </div>
+
+
+        <div class="alert alert-danger"  id="danger-message" role="alert">
+          
+        </div>
+
+
+    
+        <button type="submit" style="width:100%" class="btn btn-primary">Submit</button>
+      </form>
+</div>
+
+
+<script>
+// Kiểm tra form trước khi upload
+// Tên task phải nhập 
+// Không nhập kí tự đặc biệt với tên task
+// Position phải lớn hơn 0
+
+  document.querySelector('#form').addEventListener('submit',(e)=>{
+    let danger_message =document.querySelector('#danger-message');
+    let form = e.target;
+    task_name_value = form.querySelector('#task-name').value;
+    position = form.querySelector('#task-position').value;
+    var regex = /^[^#@!$%\^*\(\)><\//;''"":]+$/
+    if(task_name_value.trim().length == 0){
+      danger_message.style.display = 'block';
+      danger_message.innerHTML = "Vui lòng nhập tên task ";
+    e.preventDefault();
+  
+    }
+    else if(task_name_value.match(regex) == null){
+      danger_message.style.display = 'block';
+      danger_message.innerHTML = "Vui lòng không nhập kí tự đặc biệt ";
+      e.preventDefault();
+    }
+    else if(parseInt(position)<=0){
+      danger_message.style.display = 'block';
+      danger_message.innerHTML = "Vui lòng nhập position lớn hơn 0 ";
+      e.preventDefault();
+    }
+    
+    
+  })
+  
+  </script>
+
+
+<!-- End Main Section -->
+
+
+<!-- Import Header -->
+<%- include('include/_footer') %>
+<!-- End Import Header -->
